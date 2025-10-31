@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AIAssist+ — Options</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    :root{
+      --bg:#f7f9fc;
+      --card:#ffffff;
+      --accent:#2563eb;
+      --muted:#6b7280;
+      --radius:10px;
+      --pad:14px;
+      --gap:10px;
+      font-family: Inter, Roboto, Arial, sans-serif;
+    }
+    html,body{
+      height:100%;
+      margin:0;
+      background:var(--bg);
+      color:#111827;
+    }
+    .wrap{
+      max-width:820px;
+      margin:20px auto;
+      padding:var(--pad);
+    }
+    .card{
+      background:var(--card);
+      border-radius:var(--radius);
+      padding:16px;
+      box-shadow: 0 6px 18px rgba(15,23,42,0.06);
+    }
+    h1{ margin:0 0 6px 0; font-size:20px; }
+    p.lead{ margin:0 0 14px 0; color:var(--muted); font-size:13px; }
+    label{ display:block; margin-top:12px; font-weight:600; font-size:13px; color:#111827; }
+    input[type="text"], input[type="password"], select, textarea {
+      width:100%;
+      box-sizing:border-box;
+      margin-top:8px;
+      padding:10px 12px;
+      border-radius:8px;
+      border:1px solid #e5e7eb;
+      background:white;
+      font-size:14px;
+      color:#111827;
+    }
+    .row{ display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px; }
+    .btn {
+      display:inline-block;
+      padding:10px 14px;
+      border-radius:8px;
+      background:var(--accent);
+      color:white;
+      border:none;
+      cursor:pointer;
+      font-weight:600;
+    }
+    .btn.secondary {
+      background:#111827;
+      opacity:0.08;
+      color:#111827;
+    }
+    .note{ margin-top:12px; color:var(--muted); font-size:13px; line-height:1.45; }
+    .small{ font-size:12px; color:var(--muted); margin-top:6px; }
+    .status { margin-left:8px; font-weight:600; color:var(--muted); }
+    .controls { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+    .footer { margin-top:16px; font-size:13px; color:#6b7280; }
+    .kbd { background:#f3f4f6; padding:2px 6px; border-radius:6px; font-family:monospace; font-size:12px; }
+    .inline-log { margin-top:10px; padding:10px; background:#f1f5f9; border-radius:8px; color:#0f172a; font-size:13px; display:none; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card" role="region" aria-label="AIAssist options">
+      <h1>AIAssist+ Settings</h1>
+      <p class="lead">Configure your API endpoint and keys, or enable Demo Mode for quick judging without credentials.</p>
+
+      <label for="apiBase">API Base URL</label>
+      <input id="apiBase" type="text" placeholder="https://api.yourprovider.com/v1" autocomplete="off" />
+
+      <label for="apiKey">API Key / Bearer Token</label>
+      <input id="apiKey" type="password" placeholder="Enter API key (stored locally)" autocomplete="off" />
+
+      <label for="demoMode">Demo Mode</label>
+      <select id="demoMode" aria-label="Enable demo mode">
+        <option value="true">true</option>
+        <option value="false">false</option>
+      </select>
+
+      <div class="controls">
+        <button id="save" class="btn" aria-label="Save settings">Save settings</button>
+        <button id="clearMemory" class="btn secondary" aria-label="Clear saved page memory">Clear page memory</button>
+        <button id="exportMemory" class="btn secondary" aria-label="Export saved memory">Export memory</button>
+      </div>
+
+      <div class="note">
+        <strong>Tip:</strong> If you don't have API credentials for the demo, set <span class="kbd">Demo Mode</span> to <span class="kbd">true</span>. The extension will use bundled demo responses so judges can evaluate functionality.
+      </div>
+
+      <div class="small">Saved settings are stored locally in Chrome's extension storage (chrome.storage.local).</div>
+
+      <div id="inlineLog" class="inline-log" role="status" aria-live="polite"></div>
+
+      <div class="footer">
+        <div>Need help? Open DevTools on this options page (right-click → Inspect) to view console logs.</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Lightweight inline helper to ensure page is visible even if options.js fails.
+    (function(){
+      const log = (m, show=false) => {
+        console.log('AIAssist Options:', m);
+        const el = document.getElementById('inlineLog');
+        if(!el) return;
+        el.textContent = m;
+        if(show) el.style.display = 'block';
+      };
+      log('options.html loaded (inline)');
+
+      // Defensive: if chrome.storage is not available, show message
+      if (!window.chrome || !chrome.storage) {
+        log('Warning: chrome.storage not available. Are you opening this file outside of the extension context?', true);
+      }
+    })();
+  </script>
+
+  <!-- External JS: keeps logic modular. Ensure this file exists at root of extension -->
+  <script src="options.js"></script>
+</body>
+</html>

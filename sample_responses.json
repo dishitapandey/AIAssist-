@@ -1,0 +1,26 @@
+{
+  "summarize": [
+    "Demo Summary: {input} — This short summary highlights the main idea and two supporting points for quick review.",
+    "Concise summary (demo): {input} — Key points: 1) main idea 2) supporting evidence 3) takeaway."
+  ],
+  "rewrite": [
+    "Demo Rewrite: {input} — A shorter, clearer version with improved flow and simpler language.",
+    "Paraphrase (demo): {input} — Rewritten in an active voice and shorter sentences for readability."
+  ],
+  "translate": [
+    "Translated (demo): {input} → (sample translation): Hola, ¿cómo estás?",
+    "Demo translation: {input} → (sample) Salut, comment ça va?"
+  ],
+  "proofread": [
+    "Proofread (demo): {input} — Minor grammar and punctuation fixes applied; clarity improved.",
+    "Editing suggestions (demo): {input} — Suggested corrections: punctuation, sentence breaks, and word choice."
+  ],
+  "writer": [
+    "Draft (demo): {input} — Hello team,\n\nFollowing up on the above, here are the next steps...\n\nThanks.",
+    "Quick email (demo): {input} — Subject: Quick follow-up\nBody: Hi — just a short note to..."
+  ],
+  "default": [
+    "AI response (demo): {input} — This is placeholder demo text showing how the extension will return results.",
+    "Placeholder (demo): {input} — Example response for demo mode."
+  ]
+}
